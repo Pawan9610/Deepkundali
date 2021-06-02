@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- <link rel="stylesheet" href="../css/admin.css"> -->
+    <title>Document</title>
+    <style>
+            .popup-container {
+            perspective: 1000px;
+            width: 300px;
+            margin: 50px auto;
+            touch-action: none;
+            display:flex
+            }
+
+            .popup {
+            width: 100%;
+            overflow: hidden;
+            background-image: linear-gradient(#892ccc, #c7b4c8);
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+            .popup__content {
+            display: block;
+            width: 100%;
+            height: 200px;
+            position: relative;
+            }
+            .popup__buttons {
+            height: 72px;
+            }
+            .popup__buttons .button {
+            display: inline-block;
+            box-sizing: border-box;
+            width: 50%;
+            line-height: 72px;
+            }
+
+            .button {
+            text-align: center;
+            text-transform: uppercase;
+            color: #333;
+            cursor: pointer;
+            transition: color, background-color;
+            transition-duration: 0.2s;
+            }
+            .button:hover {
+            background: rgba(0, 0, 0, 0.05);
+            }
+            .button:active {
+            background: rgba(0, 0, 0, 0.1);
+            }
+
+
+    </style>
+</head>
+<body>
+    
+<div class="popup-container" id="popup-container" touch-action="none">
+    <div class="popup" id="popup">
+      <div class="popup__content lory">
+        <div class="lory__frame">
+        </div>
+      </div>
+      <div class="popup__buttons"><a class="button">Cancel</a><a class="button">Select</a></div>
+    </div>
+  </div>
+            <script>
+                    (function() {
+                    var popup = document.getElementById('popup');
+                    var popupContainer = document.getElementById('popup-container');
+                    var springSystem = new rebound.SpringSystem();
+                    var spring = springSystem.createSpring(35, 3);
+                    
+                    var force = {x: 0, y: 0};
+                    var pressStart = {x: 0, y: 0};
+                    //var pressed = false;
+
+                    spring.addListener({
+                        onSpringUpdate: function(spr) {
+                            var val = spr.getCurrentValue();
+                            rot = rebound.MathUtil.mapValueInRange(val, 0, 1, 0, 40);
+                            var transform = 'rotateX(' + rot * force.y / 3 + 'deg) ' 
+                                + 'rotateY(' + rot * force.x + 'deg)';
+                            
+                            var vendors = ['Webkit', 'Moz', 'ms'];
+                            for(var vendor in vendors) {
+                                popup.style[vendors[vendor] + 'Transform'] = transform;	
+                            }
+                        }
+                    });
+                    
+                    function updateRotation(relX, relY) {
+                        var rect = popup.getBoundingClientRect();
+                        var x = Math.max(Math.min(relX, rect.width), 0);
+                        var y = Math.max(Math.min(relY, rect.height), 0);
+                        force.x = (x/rect.width) - 0.5;
+                        force.y = -((y/rect.height) - 0.5);
+                        
+                        spring.setEndValue(Math.max(Math.abs(force.x), Math.abs(force.y)));
+                        //spring.setEndValue(Math.sqrt(Math.pow(Math.abs(force.x), 2) + Math.abs(Math.abs(force.y), 2)));
+                    }
+                    
+                    var hammertime = new Hammer(popupContainer);
+                    hammertime.get('pan').set({ threshold: 0 });
+                    
+                    popupContainer.addEventListener('pointerdown', function(ev) {
+                        //ev.preventDefault();
+                        var rect = popup.getBoundingClientRect();
+                        pressStart.x = ev.pageX - (rect.left + document.body.scrollLeft);
+                        pressStart.y = ev.pageY - (rect.top + document.body.scrollTop);
+                        
+                        updateRotation(pressStart.x, pressStart.y);
+                    });
+
+                    hammertime.on('panmove', function(ev) {
+                        updateRotation(pressStart.x + ev.deltaX, pressStart.y + ev.deltaY);
+                    });
+                    
+                    hammertime.on('panend pancancel', function(ev) {
+                        spring.setEndValue(0);
+                    });
+                    
+                    popupContainer.addEventListener('pointerup', function(ev) {
+                        spring.setEndValue(0);
+                    });
+                })();
+            </script>
+</body>
+</html>
