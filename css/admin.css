@@ -84,9 +84,10 @@ main{
 .main-content{
     /* grid-row: 2/ -1;
     grid-column: 2/-1; */
-    background-color: #fff;
+    background-color: #eef0f6;
     margin: 2% 0;
     margin-right: 2%;
+    z-index: 0;
 }
 .main-content-header{
     background-image: linear-gradient(#892cdc, #bc6ff1);
@@ -250,6 +251,7 @@ table tr th{
     border-bottom: 1px solid black;
     padding: 0.8%;
 }
+
 table tr td{
     padding: 1% 0.5%;
     color: #000;
@@ -288,17 +290,13 @@ table tr td{
     border-radius: 5px;
 }
 
-/* .add-card css start from here  */
-#add-astro{
-    position: absolute;
-    background-color: lightblue;
-    width: 400px;
-    height: 400px;
-    margin: 10px 300px;
-    display: none;
+.form-container{
+    width: 100%;
+    margin-top: 5%;
 }
-
-
-/* popup card inner springy card css */
-
-/* popup card inner springy card css */
+form{
+    padding: 3%;
+}
+.form-group{
+    margin: 5% auto;
+}

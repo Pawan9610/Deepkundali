@@ -2,7 +2,7 @@
                     <div class="main-content border shadow">
                         <div class="main-content-header center shadow-2">Astrologer Managment</div>
                         
-                    <div id="add-astro" class="border shadow">Hello
+                    <div id="add-astro" class="border center shadow">
                         <!-- <div class="popup-container" id="popup-container" touch-action="none">
                             <div class="popup" id="popup">
                                 <div class="popup__content lory">
@@ -30,7 +30,7 @@
                         </div> -->
 
                     </div>
-                        <div onclick="showCard()" class="add-btn"><a href="#" class="btn-primary btn-border shadow-3">Add Astro</a></div>
+                        <div onclick="showCard()" class="add-btn"><a href="./add-astro.php" class="btn-primary btn-border shadow-3">Add Astro</a></div>
                         <div class="tbl center">
                             <table class="primary-color font-m">
                                 <tr>
@@ -53,9 +53,9 @@
                                         <td>5 years</td>
                                         <td>100 rs/min</td>
                                         <td>
-                                            <a href="#" class="btn-secondary btn-border shadow-4">Update Astro</a>
+                                            <a href="./update-astro.php" class="btn-secondary btn-border shadow-4">Update Astro</a>
                                             <a href="#" class="btn-danger btn-border shadow-4">Delete Astro</a>
-                                            
+                                             
                                         </td>
                                     </tr>
                                     <tr>
