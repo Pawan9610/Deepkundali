@@ -2,7 +2,7 @@
 
 :root{
     --clr-bg-primary   	: #0c1023;
-    --clr-bg-secondary 	: #07273c;
+    --clr-bg-secondary 	: #373b4f;
 
     --clr-card-Primary 	: #18384f;
     --clr-card-secondary: #07273c;
@@ -11,6 +11,8 @@
     --clr-Secondary: #daf0f7;
 
     --clr-icon     : #fff;
+
+    --clr-small-info: #545d7a;
 
     --ff-primary   :'Philosopher', sans-serif;
     --ff-secondary :'Inter', sans-serif;;
@@ -49,8 +51,6 @@ h4{
   align-items: center;
   margin: 0;
   background-color: var(--clr-bg-secondary);
-  font-family: "Roboto", sans-serif;
-  color: #10182f;
 }
 .container {
   display: flex;
@@ -79,7 +79,9 @@ h4{
   /* padding: 20px; */
   min-height: 250px;
 }
-
+.card-body h4{
+  margin-top: 3%;
+}
 .tag {
   background: #cccccc;
   border-radius: 50px;
@@ -87,6 +89,7 @@ h4{
   margin: 0;
   color: #fff;
   padding: 2px 10px;
+  font-family: var(--ff-secondary);
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -119,5 +122,5 @@ h4{
   margin: 0;
 }
 .user-info small {
-  color: #545d7a;
+  color: var(--clr-small-info);
 }
